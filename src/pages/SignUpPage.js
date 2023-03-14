@@ -109,6 +109,9 @@ const SignUpContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #ffffff;
+  height: 100vh;
+  width: 100vw;
   img {
     margin-top: 70px;
     width: 180px;

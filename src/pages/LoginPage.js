@@ -1,13 +1,16 @@
 import logo from "../assets/logo.png";
 
 import styled from "styled-components";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import { ThreeDots } from "react-loader-spinner";
 
+import Usuario from "../globals/Usuario";
+
 export default function LoginPage() {
+  const [usuario, setUsuario] = useContext(Usuario);
+
   const navigate = useNavigate();
 
   const [form, setForm] = useState({ email: "", senha: "", disabled: false });
@@ -24,11 +27,12 @@ export default function LoginPage() {
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",
       login
     );
-    promise.then(loginSuccess);
+    promise.then(res=>loginSuccess(res));
     promise.catch(loginFailed);
   }
 
-  function loginSuccess() {
+  function loginSuccess(res) {
+    setUsuario(res.data);
     navigate("/hoje");
   }
 
@@ -82,6 +86,9 @@ const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #ffffff;
+  height: 100vh;
+  width: 100vw;
   img {
     margin-top: 70px;
     width: 180px;
