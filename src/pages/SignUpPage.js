@@ -53,6 +53,7 @@ export default function SignupPage() {
       <img src={logo} alt="trackit-logo" />
       <form onSubmit={signup}>
         <input
+          data-test="email-input"
           required
           type="email"
           name="email"
@@ -62,6 +63,7 @@ export default function SignupPage() {
           disabled={form.disabled ? true : false}
         />
         <input
+          data-test="password-input"
           required
           type="password"
           name="senha"
@@ -71,6 +73,7 @@ export default function SignupPage() {
           disabled={form.disabled ? true : false}
         />
         <input
+          data-test="user-name-input"
           required
           name="nome"
           value={form.nome}
@@ -79,6 +82,7 @@ export default function SignupPage() {
           disabled={form.disabled ? true : false}
         />
         <input
+          data-test="user-image-input"
           required
           name="foto"
           value={form.foto}
@@ -86,7 +90,7 @@ export default function SignupPage() {
           placeholder="foto"
           disabled={form.disabled ? true : false}
         />
-        <button type="submit" disabled={form.disabled ? true : false}>
+        <button data-test="signup-btn" type="submit" disabled={form.disabled ? true : false}>
           <p>Cadastrar</p>
           <ThreeDots
             height="13"
@@ -100,7 +104,7 @@ export default function SignupPage() {
           />
         </button>
       </form>
-      <Link to="/">Já tem uma conta? Faça login!</Link>
+      <Link data-test="login-link" to="/">Já tem uma conta? Faça login!</Link>
     </SignUpContainer>
   );
 }

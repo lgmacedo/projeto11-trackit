@@ -9,9 +9,9 @@ import Progresso from "../globals/Progresso";
 export default function Menu() {
   const [progresso, setProgresso] = useContext(Progresso);
   return (
-    <MenuContainer>
-      <Link to="/habitos">Hábitos</Link>
-      <Link to="/hoje">
+    <MenuContainer data-test="menu">
+      <Link data-test="habit-link" to="/habitos">Hábitos</Link>
+      <Link data-test="today-link" to="/hoje">
         <CircularProgressbar
           value={Math.round((progresso[0]/progresso[1])*100)}
           text={"Hoje"}
@@ -26,7 +26,7 @@ export default function Menu() {
           })}
         />
       </Link>
-      <Link to="/historico">Histórico</Link>
+      <Link data-test="history-link" to="/historico">Histórico</Link>
     </MenuContainer>
   );
 }

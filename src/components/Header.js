@@ -6,7 +6,7 @@ import { useContext } from "react";
 export default function Header() {
   const [usuario, setUsuario] = useContext(Usuario);
   return (
-    <HeaderContainer>
+    <HeaderContainer data-test="header">
       <p>TrackIt</p>
       <img src={usuario.image} alt="profile-picture" />
     </HeaderContainer>

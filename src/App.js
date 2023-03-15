@@ -8,6 +8,7 @@ import HabitsPage from "./pages/HabitsPage";
 
 import Usuario from "./globals/Usuario";
 import Progresso from "./globals/Progresso";
+import HistoryPage from "./pages/HistoryPage";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/cadastro" element={<SignUpPage />} />
         <Route path="/hoje" element={<TodayPage />} />
         <Route path="/habitos" element={<HabitsPage />} />
+        <Route path="/historico" element={<HistoryPage />} />
       </Routes>
     </Progresso.Provider>
     </Usuario.Provider>

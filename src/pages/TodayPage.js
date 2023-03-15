@@ -74,20 +74,22 @@ export default function TodayPage() {
       <Header />
       <TodayContainer>
         <TodayTitle progresso={(progresso[0] / progresso[1]) * 100 > 0}>
-          <p>
+          <p data-test="today">
             {DiasSemana[dayjs().day()].extenso}, {dayjs().date()}/
             {(dayjs().month() + 1).toString().padStart(2, "0")}
           </p>
-          <p>Nenhum hábito concluído ainda</p>
-          <p>
-            {Math.round((progresso[0] / progresso[1]) * 100)}% dos hábitos
-            concluídos
-          </p>
+          <div data-test="today-counter">
+            <p>Nenhum hábito concluído ainda</p>
+            <p>
+              {Math.round((progresso[0] / progresso[1]) * 100)}% dos hábitos
+              concluídos
+            </p>
+          </div>
         </TodayTitle>
         {todayHabits.map((h) => (
-          <Habit key={h.id}>
+          <Habit data-test="today-habit-container" key={h.id}>
             <HabitInfo>
-              <HabitTitle>{h.name}</HabitTitle>
+              <HabitTitle data-test="today-habit-name">{h.name}</HabitTitle>
               <HabitStats
                 greenSeq={h.done}
                 greenRec={
@@ -95,7 +97,7 @@ export default function TodayPage() {
                   h.highestSequence > 0
                 }
               >
-                <p>
+                <p data-test="today-habit-sequence">
                   Sequência atual:{" "}
                   <span>
                     {h.currentSequence !== 1
@@ -103,7 +105,7 @@ export default function TodayPage() {
                       : `${h.currentSequence} dia`}
                   </span>
                 </p>
-                <p>
+                <p data-test="today-habit-record">
                   Seu recorde:{" "}
                   <span>
                     {h.highestSequence !== 1
@@ -114,7 +116,7 @@ export default function TodayPage() {
               </HabitStats>
             </HabitInfo>
             <DoneButton done={h.done}>
-              <button onClick={() => clickHabit(h.id, h.done)}>
+              <button data-test="today-habit-check-btn" onClick={() => clickHabit(h.id, h.done)}>
                 <img src={Check} alt="check" />
               </button>
             </DoneButton>
@@ -141,13 +143,13 @@ const TodayTitle = styled.div`
     line-height: 29px;
     color: #126ba5;
   }
-  p:nth-child(2) {
+  div p:nth-child(1) {
     display: ${({ progresso }) => (progresso ? "none" : "")};
     font-size: 17.976px;
     line-height: 22px;
     color: #bababa;
   }
-  p:nth-child(3) {
+  div p:nth-child(2) {
     display: ${({ progresso }) => (progresso ? "" : "none")};
     font-size: 17.976px;
     line-height: 22px;

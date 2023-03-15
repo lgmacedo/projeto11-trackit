@@ -27,7 +27,7 @@ export default function LoginPage() {
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",
       login
     );
-    promise.then(res=>loginSuccess(res));
+    promise.then((res) => loginSuccess(res));
     promise.catch(loginFailed);
   }
 
@@ -46,6 +46,7 @@ export default function LoginPage() {
       <img src={logo} alt="trackit-logo" />
       <form onSubmit={login}>
         <input
+          data-test="email-input"
           required
           type="email"
           name="email"
@@ -55,6 +56,7 @@ export default function LoginPage() {
           disabled={form.disabled ? true : false}
         />
         <input
+          data-test="password-input"
           required
           type="password"
           name="senha"
@@ -63,7 +65,11 @@ export default function LoginPage() {
           placeholder="senha"
           disabled={form.disabled ? true : false}
         />
-        <button type="submit" disabled={form.disabled ? true : false}>
+        <button
+          data-test="login-btn"
+          type="submit"
+          disabled={form.disabled ? true : false}
+        >
           <p>Entrar</p>
           <ThreeDots
             height="13"
@@ -77,7 +83,9 @@ export default function LoginPage() {
           />
         </button>
       </form>
-      <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
+      <Link data-test="signup-link" to="/cadastro">
+        Não tem uma conta? Cadastre-se!
+      </Link>
     </LoginContainer>
   );
 }

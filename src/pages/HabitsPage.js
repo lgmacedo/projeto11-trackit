@@ -150,11 +150,12 @@ export default function HabitsPage() {
       <HabitsContainer>
         <HabitsTitle>
           <p>Meus hábitos</p>
-          <button onClick={openNewHabit}>+</button>
+          <button data-test="habit-create-btn" onClick={openNewHabit}>+</button>
         </HabitsTitle>
-        <AddHabit newHabitOpen={newHabitOpen} desabilitado={desabilitado}>
+        <AddHabit data-test="habit-create-container" newHabitOpen={newHabitOpen} desabilitado={desabilitado}>
           <form onSubmit={novoHabito}>
             <input
+              data-test="habit-name-input"
               disabled={desabilitado ? true : false}
               required
               value={nomeHabito}
@@ -165,6 +166,7 @@ export default function HabitsPage() {
             <Dias>
               {dias.map((d) => (
                 <BotaoDia
+                  data-test="habit-day"
                   disabled={desabilitado ? true : false}
                   key={d.dia}
                   selecionado={d.selecionado}
@@ -178,13 +180,14 @@ export default function HabitsPage() {
             </Dias>
             <Botoes desabilitado={desabilitado}>
               <button
+                data-test="habit-create-cancel-btn"
                 onClick={() => setNewHabitOpen(false)}
                 disabled={desabilitado ? true : false}
                 type="button"
               >
                 Cancelar
               </button>
-              <button disabled={desabilitado ? true : false} type="submit">
+              <button data-test="habit-create-save-btn" disabled={desabilitado ? true : false} type="submit">
                 <p>Salvar</p>
                 <ThreeDots
                   height="13"
@@ -201,11 +204,12 @@ export default function HabitsPage() {
           </form>
         </AddHabit>
         {habitos.map((h) => (
-          <Habit key={h.id}>
-            <p>{h.name}</p>
+          <Habit data-test="habit-container" key={h.id}>
+            <p data-test="habit-name">{h.name}</p>
             <Dias>
               {dias.map((d) => (
                 <BotaoDia
+                  data-test="habit-day"
                   disabled={true}
                   key={d.dia}
                   selecionado={h.days.includes(d.dia)}
@@ -217,6 +221,7 @@ export default function HabitsPage() {
               ))}
             </Dias>
             <img
+              data-test="habit-delete-btn"
               onClick={() => deleteHabit(h.id, h.days)}
               src={trash}
               alt="trash-bin"
