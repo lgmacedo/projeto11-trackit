@@ -73,6 +73,10 @@ export default function HabitsPage() {
 
   function novoHabito(e) {
     e.preventDefault();
+    if (nomeHabito === "") {
+      alert("Insira um nome para o novo hábito");
+      return;
+    }
     if (diasSelecionados.length === 0) {
       alert("Escolha pelo menos um dia da semana");
       return;
@@ -150,14 +154,19 @@ export default function HabitsPage() {
       <HabitsContainer>
         <HabitsTitle>
           <p>Meus hábitos</p>
-          <button data-test="habit-create-btn" onClick={openNewHabit}>+</button>
+          <button data-test="habit-create-btn" onClick={openNewHabit}>
+            +
+          </button>
         </HabitsTitle>
-        <AddHabit data-test="habit-create-container" newHabitOpen={newHabitOpen} desabilitado={desabilitado}>
+        <AddHabit
+          data-test="habit-create-container"
+          newHabitOpen={newHabitOpen}
+          desabilitado={desabilitado}
+        >
           <form onSubmit={novoHabito}>
             <input
               data-test="habit-name-input"
               disabled={desabilitado ? true : false}
-              required
               value={nomeHabito}
               onChange={(e) => setNomeHabito(e.target.value)}
               placeholder="nome do hábito"
@@ -187,7 +196,11 @@ export default function HabitsPage() {
               >
                 Cancelar
               </button>
-              <button data-test="habit-create-save-btn" disabled={desabilitado ? true : false} type="submit">
+              <button
+                data-test="habit-create-save-btn"
+                disabled={desabilitado ? true : false}
+                type="submit"
+              >
                 <p>Salvar</p>
                 <ThreeDots
                   height="13"

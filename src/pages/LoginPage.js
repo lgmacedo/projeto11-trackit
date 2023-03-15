@@ -70,17 +70,22 @@ export default function LoginPage() {
           type="submit"
           disabled={form.disabled ? true : false}
         >
-          <p>Entrar</p>
-          <ThreeDots
-            height="13"
-            width="51"
-            radius="9"
-            color="#ffffff"
-            ariaLabel="three-dots-loading"
-            wrapperStyle={{}}
-            wrapperClassName=""
-            visible={form.disabled}
-          />
+          <p>
+            {form.disabled ? (
+              <ThreeDots
+                height="13"
+                width="51"
+                radius="9"
+                color="#ffffff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={form.disabled}
+              />
+            ) : (
+              "Entrar"
+            )}
+          </p>
         </button>
       </form>
       <Link data-test="signup-link" to="/cadastro">
@@ -142,9 +147,6 @@ const LoginContainer = styled.div`
     text-align: center;
     cursor: ${({ disabled }) => (disabled ? "" : "pointer")};
     color: white;
-    p {
-      display: ${({ disabled }) => (disabled ? "none" : "")};
-    }
   }
   a {
     margin-top: 25px;

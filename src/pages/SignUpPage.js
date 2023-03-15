@@ -90,21 +90,32 @@ export default function SignupPage() {
           placeholder="foto"
           disabled={form.disabled ? true : false}
         />
-        <button data-test="signup-btn" type="submit" disabled={form.disabled ? true : false}>
-          <p>Cadastrar</p>
-          <ThreeDots
-            height="13"
-            width="51"
-            radius="9"
-            color="#ffffff"
-            ariaLabel="three-dots-loading"
-            wrapperStyle={{}}
-            wrapperClassName=""
-            visible={form.disabled}
-          />
+        <button
+          data-test="signup-btn"
+          type="submit"
+          disabled={form.disabled ? true : false}
+        >
+          <p>
+            {form.disabled ? (
+              <ThreeDots
+                height="13"
+                width="51"
+                radius="9"
+                color="#ffffff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={form.disabled}
+              />
+            ) : (
+              "Cadastrar"
+            )}
+          </p>
         </button>
       </form>
-      <Link data-test="login-link" to="/">Já tem uma conta? Faça login!</Link>
+      <Link data-test="login-link" to="/">
+        Já tem uma conta? Faça login!
+      </Link>
     </SignUpContainer>
   );
 }
@@ -161,9 +172,6 @@ const SignUpContainer = styled.div`
     text-align: center;
     cursor: ${({ disabled }) => (disabled ? "" : "pointer")};
     color: white;
-    p {
-      display: ${({ disabled }) => (disabled ? "none" : "")};
-    }
   }
   a {
     margin-top: 25px;
