@@ -4,9 +4,11 @@ import { useState } from "react";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import TodayPage from "./pages/TodayPage";
+import HabitsPage from "./pages/HabitsPage";
 
 import Usuario from "./globals/Usuario";
 import Progresso from "./globals/Progresso";
+
 
 function App() {
   const [usuario, setUsuario] = useState({});
@@ -19,6 +21,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/cadastro" element={<SignUpPage />} />
         <Route path="/hoje" element={<TodayPage />} />
+        <Route path="/habitos" element={<HabitsPage />} />
       </Routes>
     </Progresso.Provider>
     </Usuario.Provider>

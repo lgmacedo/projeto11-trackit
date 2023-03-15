@@ -36,7 +36,7 @@ const MenuContainer = styled.div`
   justify-content: center;
   column-gap: 35px;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 70px;
   background: #ffffff;
   position: fixed;
