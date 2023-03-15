@@ -7,12 +7,16 @@ import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
+import dayjs from "dayjs";
 
 import Usuario from "../globals/Usuario";
+import Progresso from "../globals/Progresso";
 
 export default function HabitsPage() {
   const [usuario, setUsuario] = useContext(Usuario);
   const [habitos, setHabitos] = useState([]);
+
+  const [progresso, setProgresso] = useContext(Progresso);
 
   useEffect(() => {
     const config = {
@@ -29,13 +33,13 @@ export default function HabitsPage() {
 
   const [nomeHabito, setNomeHabito] = useState("");
   const [dias, setDias] = useState([
-    { nome: "D", dia: 0, selecionado: false },
-    { nome: "S", dia: 1, selecionado: false },
-    { nome: "T", dia: 2, selecionado: false },
-    { nome: "Q", dia: 3, selecionado: false },
-    { nome: "Q", dia: 4, selecionado: false },
-    { nome: "S", dia: 5, selecionado: false },
-    { nome: "S", dia: 6, selecionado: false },
+    { nome: "D", dia: 0, selecionado: false, extenso: "Domingo" },
+    { nome: "S", dia: 1, selecionado: false, extenso: "Segunda" },
+    { nome: "T", dia: 2, selecionado: false, extenso: "Terça" },
+    { nome: "Q", dia: 3, selecionado: false, extenso: "Quarta" },
+    { nome: "Q", dia: 4, selecionado: false, extenso: "Quinta" },
+    { nome: "S", dia: 5, selecionado: false, extenso: "Sexta" },
+    { nome: "S", dia: 6, selecionado: false, extenso: "Sábado" },
   ]);
   const [diasSelecionados, setDiasSelecionados] = useState([]);
 
@@ -85,25 +89,31 @@ export default function HabitsPage() {
       habito,
       config
     );
-    promise.then(novoHabitoSuccess);
+    promise.then(() => novoHabitoSuccess(diasSelecionados));
     promise.catch(novoHabitoFailed);
   }
 
-  function novoHabitoSuccess() {
+  function novoHabitoSuccess(diasSelecionados) {
     setNomeHabito("");
     setDias([
-      { nome: "D", dia: 0, selecionado: false },
-      { nome: "S", dia: 1, selecionado: false },
-      { nome: "T", dia: 2, selecionado: false },
-      { nome: "Q", dia: 3, selecionado: false },
-      { nome: "Q", dia: 4, selecionado: false },
-      { nome: "S", dia: 5, selecionado: false },
-      { nome: "S", dia: 6, selecionado: false },
+      { nome: "D", dia: 0, selecionado: false, extenso: "Domingo" },
+      { nome: "S", dia: 1, selecionado: false, extenso: "Segunda" },
+      { nome: "T", dia: 2, selecionado: false, extenso: "Terça" },
+      { nome: "Q", dia: 3, selecionado: false, extenso: "Quarta" },
+      { nome: "Q", dia: 4, selecionado: false, extenso: "Quinta" },
+      { nome: "S", dia: 5, selecionado: false, extenso: "Sexta" },
+      { nome: "S", dia: 6, selecionado: false, extenso: "Sábado" },
     ]);
     setDiasSelecionados([]);
     setDesabilitado(false);
     setNewHabitOpen(false);
     setHabitos(habitos);
+
+    /*if (diasSelecionados.includes(dayjs().day())) {
+      const newProgresso = [...progresso];
+      newProgresso[1]++;
+      setProgresso(newProgresso);
+    }*/
   }
 
   function novoHabitoFailed() {
@@ -111,7 +121,7 @@ export default function HabitsPage() {
     alert("Erro na requisição do servidor");
   }
 
-  function deleteHabit(id) {
+  function deleteHabit(id, days) {
     const resposta = window.confirm("Deseja mesmo apagar esse hábito?");
     if (resposta !== true) return;
     const config = {
@@ -124,6 +134,14 @@ export default function HabitsPage() {
       config
     );
     promise.then(() => setHabitos(habitos));
+
+    /*if (days.includes(dayjs().day())) {
+      const newProgresso = [...progresso];
+      newProgresso[1]--;
+      if(newProgresso[1]===0)
+        newProgresso[0]=0;
+      setProgresso(newProgresso);
+    }*/
   }
 
   return (
@@ -199,7 +217,7 @@ export default function HabitsPage() {
               ))}
             </Dias>
             <img
-              onClick={() => deleteHabit(h.id)}
+              onClick={() => deleteHabit(h.id, h.days)}
               src={trash}
               alt="trash-bin"
             />

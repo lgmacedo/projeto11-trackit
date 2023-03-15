@@ -12,7 +12,7 @@ import Progresso from "./globals/Progresso";
 
 function App() {
   const [usuario, setUsuario] = useState({});
-  const [progresso, setProgresso] = useState(0);
+  const [progresso, setProgresso] = useState([0, 0]);
 
   return (
     <Usuario.Provider value={[usuario, setUsuario]}>

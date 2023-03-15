@@ -13,7 +13,7 @@ export default function Menu() {
       <Link to="/habitos">Hábitos</Link>
       <Link to="/hoje">
         <CircularProgressbar
-          value={progresso}
+          value={Math.round((progresso[0]/progresso[1])*100)}
           text={"Hoje"}
           background={true}
           backgroundPadding={5}
