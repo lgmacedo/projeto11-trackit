@@ -47,13 +47,15 @@ export default function HabitsPage() {
   const [desabilitado, setDesabilitado] = useState(false);
 
   function openNewHabit() {
-    if (newHabitOpen === true) return;
+    if (newHabitOpen === true) {
+      return;
+    }
     setNewHabitOpen(true);
   }
 
   function clickDia(dia) {
     if (diasSelecionados.includes(dia)) {
-      let newDias = [...dias];
+      const newDias = [...dias];
       newDias[dia].selecionado = false;
       setDias([...newDias]);
       const index = diasSelecionados.indexOf(dia);
@@ -64,7 +66,7 @@ export default function HabitsPage() {
       setDiasSelecionados(newDiasSelecionados);
       return;
     }
-    let newDias = [...dias];
+    const newDias = [...dias];
     newDias[dia].selecionado = true;
     setDias([...newDias]);
     const newDiasSelecionados = [...diasSelecionados, dia].sort();
@@ -127,7 +129,9 @@ export default function HabitsPage() {
 
   function deleteHabit(id, days) {
     const resposta = window.confirm("Deseja mesmo apagar esse hábito?");
-    if (resposta !== true) return;
+    if (resposta !== true) {
+      return;
+    }
     const config = {
       headers: {
         Authorization: `Bearer ${usuario.token}`,

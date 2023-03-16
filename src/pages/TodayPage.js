@@ -36,7 +36,7 @@ export default function TodayPage() {
   function todayUpdate2(data) {
     const newTodayHabits = data;
     let done = 0;
-    let toDo = data.length;
+    const toDo = data.length;
     for (let i = 0; i < data.length; i++) {
       if (data[i].done === true) {
         done++;
