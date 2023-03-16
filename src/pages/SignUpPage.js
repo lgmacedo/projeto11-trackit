@@ -95,7 +95,7 @@ export default function SignupPage() {
           type="submit"
           disabled={form.disabled ? true : false}
         >
-          <p>
+          <div>
             {form.disabled ? (
               <ThreeDots
                 height="13"
@@ -110,7 +110,7 @@ export default function SignupPage() {
             ) : (
               "Cadastrar"
             )}
-          </p>
+          </div>
         </button>
       </form>
       <Link data-test="login-link" to="/">

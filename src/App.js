@@ -10,22 +10,21 @@ import Usuario from "./globals/Usuario";
 import Progresso from "./globals/Progresso";
 import HistoryPage from "./pages/HistoryPage";
 
-
 function App() {
   const [usuario, setUsuario] = useState({});
   const [progresso, setProgresso] = useState([0, 0]);
 
   return (
     <Usuario.Provider value={[usuario, setUsuario]}>
-    <Progresso.Provider value={[progresso, setProgresso]}>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/cadastro" element={<SignUpPage />} />
-        <Route path="/hoje" element={<TodayPage />} />
-        <Route path="/habitos" element={<HabitsPage />} />
-        <Route path="/historico" element={<HistoryPage />} />
-      </Routes>
-    </Progresso.Provider>
+      <Progresso.Provider value={[progresso, setProgresso]}>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/cadastro" element={<SignUpPage />} />
+          <Route path="/hoje" element={<TodayPage />} />
+          <Route path="/habitos" element={<HabitsPage />} />
+          <Route path="/historico" element={<HistoryPage />} />
+        </Routes>
+      </Progresso.Provider>
     </Usuario.Provider>
   );
 }

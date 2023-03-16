@@ -1,7 +1,7 @@
 import logo from "../assets/logo.png";
 
 import styled from "styled-components";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
@@ -12,6 +12,13 @@ export default function LoginPage() {
   const [usuario, setUsuario] = useContext(Usuario);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("usuario") !== null) {
+      setUsuario(JSON.parse(localStorage.getItem("usuario")));
+      navigate("/hoje");
+    }
+  }, []);
 
   const [form, setForm] = useState({ email: "", senha: "", disabled: false });
 
@@ -33,6 +40,7 @@ export default function LoginPage() {
 
   function loginSuccess(res) {
     setUsuario(res.data);
+    localStorage.setItem("usuario", JSON.stringify(res.data));
     navigate("/hoje");
   }
 
@@ -70,7 +78,7 @@ export default function LoginPage() {
           type="submit"
           disabled={form.disabled ? true : false}
         >
-          <p>
+          <div>
             {form.disabled ? (
               <ThreeDots
                 height="13"
@@ -85,7 +93,7 @@ export default function LoginPage() {
             ) : (
               "Entrar"
             )}
-          </p>
+          </div>
         </button>
       </form>
       <Link data-test="signup-link" to="/cadastro">
